@@ -190,7 +190,7 @@ export function ContactForm() {
               </Label>
               <Input
                 id="whatsapp"
-                placeholder="+52 123 456 7890"
+                placeholder="+507 0000-0000"
                 value={form.whatsapp}
                 onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
                 onFocus={() => setFocused("whatsapp")}
