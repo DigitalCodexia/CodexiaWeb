@@ -4,8 +4,7 @@ import { TrustBar } from "@/components/trust-bar"
 import { Services } from "@/components/services"
 import { Process } from "@/components/process"
 import { Benefits } from "@/components/benefits"
-import { Portfolio } from "@/components/portfolio"
-import { Testimonials } from "@/components/testimonials"
+
 import { FAQ } from "@/components/faq"
 import { CtaFinal } from "@/components/cta-final"
 import { ContactForm } from "@/components/contact-form"
@@ -21,8 +20,7 @@ export default function Home() {
       <Services />
       <Process />
       <Benefits />
-      <Portfolio />
-      <Testimonials />
+
       <FAQ />
       <CtaFinal />
       <ContactForm />

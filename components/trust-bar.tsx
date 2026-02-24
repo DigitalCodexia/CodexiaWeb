@@ -4,7 +4,6 @@ const trustItems = [
   "Desarrollo moderno",
   "Diseno responsive",
   "SEO basico",
-  "Integracion WhatsApp",
   "Formularios de contacto",
 ]
 

@@ -6,8 +6,8 @@ const services = [
   {
     icon: ShoppingCart,
     title: "Tiendas Online (Ecommerce)",
-    description: "Vende 24/7 con tu catalogo, pagos e integraciones.",
-    features: ["Catalogo de productos", "Carrito de compras", "Checkout seguro", "Integracion WhatsApp", "Panel de administracion"],
+    description: "Vende 24/7 con Shopify o tienda propia, pagos e integraciones.",
+    features: ["Shopify / tienda a medida", "Catalogo de productos", "Carrito y checkout seguro", "Panel de administracion"],
   },
   {
     icon: Globe,

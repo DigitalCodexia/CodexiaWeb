@@ -16,7 +16,7 @@ export function Hero() {
       <div className="relative mx-auto max-w-7xl px-4 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Impulsa tu negocio con soluciones web que venden
+            Impulsa tu Negocio con Soluciones, Automatizaciones, Sistemas Web y Aplicaciones
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
             Tiendas online, paginas web, landing pages y aplicaciones web. Diseno moderno + velocidad + conversion.
