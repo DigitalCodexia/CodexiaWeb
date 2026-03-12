@@ -10,6 +10,7 @@ import { CtaFinal } from "@/components/cta-final"
 import { ContactForm } from "@/components/contact-form"
 import { Footer } from "@/components/footer"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { Portfolio } from "@/components/portfolio"
 
 export default function Home() {
   return (
@@ -20,7 +21,7 @@ export default function Home() {
       <Services />
       <Process />
       <Benefits />
-
+      <Portfolio />
       <FAQ />
       <CtaFinal />
       <ContactForm />
