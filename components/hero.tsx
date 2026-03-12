@@ -30,10 +30,10 @@ const slides = [
     image: "/images/portfolio-blog.png",
     label: "Blog / Contenido",
   },
-  {
-    image: "/images/portfolio-boda.png",
-    label: "Landing Page",
-  },
+  // {
+  //   image: "/images/portfolio-boda.png",
+  //   label: "Landing Page",
+  // },
   {
     image: "/images/portfolio-planilla.jpeg",
     label: "App Web / Sistema",

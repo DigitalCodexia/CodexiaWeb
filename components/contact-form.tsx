@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Send, CheckCircle2, User, Building2, Mail, Phone, MessageSquare } from "lucide-react"
+import { Send, CheckCircle2, User, Building2, Mail, Phone, MessageSquare, Loader2 } from "lucide-react"
 
 const serviceOptions = [
   "Tienda Online",
@@ -30,6 +30,7 @@ interface FormData {
   whatsapp: string
   servicio: string
   mensaje: string
+  website: string // honeypot — invisible to real users
 }
 
 export function ContactForm() {
@@ -40,10 +41,13 @@ export function ContactForm() {
     whatsapp: "",
     servicio: "",
     mensaje: "",
+    website: "",
   })
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [focused, setFocused] = useState<string | null>(null)
+  const [serverError, setServerError] = useState<string | null>(null)
 
   function validate(): boolean {
     const newErrors: Partial<Record<keyof FormData, string>> = {}
@@ -51,7 +55,7 @@ export function ContactForm() {
     if (!form.email.trim()) {
       newErrors.email = "Tu email es requerido"
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      newErrors.email = "Ingresa un email valido"
+      newErrors.email = "Ingresa un email válido"
     }
     if (!form.whatsapp.trim()) newErrors.whatsapp = "Tu WhatsApp es requerido"
     if (!form.servicio) newErrors.servicio = "Selecciona un servicio"
@@ -59,10 +63,36 @@ export function ContactForm() {
     return Object.keys(newErrors).length === 0
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!validate()) return
-    setSubmitted(true)
+
+    // Honeypot: if filled, silently drop (bot detected)
+    if (form.website) return
+
+    setLoading(true)
+    setServerError(null)
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        setServerError(data.error ?? "Error al enviar. Intenta de nuevo.")
+        return
+      }
+
+      setSubmitted(true)
+    } catch {
+      setServerError("Error de conexión. Intenta de nuevo.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (submitted) {
@@ -74,9 +104,9 @@ export function ContactForm() {
             <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/15">
               <CheckCircle2 className="h-10 w-10 text-primary" />
             </div>
-            <h3 className="mt-6 text-2xl font-bold text-foreground">Mensaje enviado con exito</h3>
+            <h3 className="mt-6 text-2xl font-bold text-foreground">Mensaje enviado con éxito</h3>
             <p className="mt-3 text-muted-foreground leading-relaxed">
-              Gracias por tu interes. Nuestro equipo revisara tu solicitud y te contactara en menos de 24 horas.
+              Gracias por tu interés. Nuestro equipo revisará tu solicitud y te contactará en menos de 24 horas.
             </p>
             <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
             <p className="mt-4 text-sm text-muted-foreground">
@@ -90,7 +120,6 @@ export function ContactForm() {
 
   return (
     <section id="contacto" className="relative overflow-hidden py-20 lg:py-28">
-      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card to-background" />
       <div className="absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
@@ -114,29 +143,44 @@ export function ContactForm() {
         {/* Form Card */}
         <div className="mt-12 rounded-2xl border border-border bg-card/60 p-6 backdrop-blur-sm sm:p-10">
           <form onSubmit={handleSubmit} className="grid gap-6 sm:grid-cols-2" noValidate>
+
+            {/* ── HONEYPOT (invisible to humans, visible to bots) ── */}
+            <div
+              aria-hidden="true"
+              style={{ position: "absolute", left: "-9999px", top: "-9999px", height: 0, width: 0, overflow: "hidden", opacity: 0 }}
+              tabIndex={-1}
+            >
+              <label htmlFor="website">Website</label>
+              <input
+                id="website"
+                name="website"
+                type="text"
+                autoComplete="off"
+                tabIndex={-1}
+                value={form.website}
+                onChange={(e) => setForm({ ...form, website: e.target.value })}
+              />
+            </div>
+
             {/* Nombre */}
             <div className="flex flex-col gap-2.5">
               <Label htmlFor="nombre" className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <User className="h-3.5 w-3.5 text-muted-foreground" />
                 Nombre <span className="text-primary">*</span>
               </Label>
-              <div className="relative">
-                <Input
-                  id="nombre"
-                  placeholder="Tu nombre completo"
-                  value={form.nombre}
-                  onChange={(e) => setForm({ ...form, nombre: e.target.value })}
-                  onFocus={() => setFocused("nombre")}
-                  onBlur={() => setFocused(null)}
-                  aria-invalid={!!errors.nombre}
-                  className={`h-12 rounded-xl border-border bg-secondary/50 text-foreground placeholder:text-muted-foreground/60 transition-all ${
-                    focused === "nombre" ? "border-primary/50 ring-1 ring-primary/20" : ""
-                  } ${errors.nombre ? "border-destructive" : ""}`}
-                />
-              </div>
-              {errors.nombre && (
-                <p className="text-xs text-destructive">{errors.nombre}</p>
-              )}
+              <Input
+                id="nombre"
+                placeholder="Tu nombre completo"
+                value={form.nombre}
+                onChange={(e) => setForm({ ...form, nombre: e.target.value })}
+                onFocus={() => setFocused("nombre")}
+                onBlur={() => setFocused(null)}
+                aria-invalid={!!errors.nombre}
+                className={`h-12 rounded-xl border-border bg-secondary/50 text-foreground placeholder:text-muted-foreground/60 transition-all ${
+                  focused === "nombre" ? "border-primary/50 ring-1 ring-primary/20" : ""
+                } ${errors.nombre ? "border-destructive" : ""}`}
+              />
+              {errors.nombre && <p className="text-xs text-destructive">{errors.nombre}</p>}
             </div>
 
             {/* Negocio */}
@@ -177,9 +221,7 @@ export function ContactForm() {
                   focused === "email" ? "border-primary/50 ring-1 ring-primary/20" : ""
                 } ${errors.email ? "border-destructive" : ""}`}
               />
-              {errors.email && (
-                <p className="text-xs text-destructive">{errors.email}</p>
-              )}
+              {errors.email && <p className="text-xs text-destructive">{errors.email}</p>}
             </div>
 
             {/* WhatsApp */}
@@ -200,20 +242,15 @@ export function ContactForm() {
                   focused === "whatsapp" ? "border-primary/50 ring-1 ring-primary/20" : ""
                 } ${errors.whatsapp ? "border-destructive" : ""}`}
               />
-              {errors.whatsapp && (
-                <p className="text-xs text-destructive">{errors.whatsapp}</p>
-              )}
+              {errors.whatsapp && <p className="text-xs text-destructive">{errors.whatsapp}</p>}
             </div>
 
             {/* Servicio */}
             <div className="flex flex-col gap-2.5 sm:col-span-2">
               <Label htmlFor="servicio" className="text-sm font-medium text-foreground">
-                Servicio de interes <span className="text-primary">*</span>
+                Servicio de interés <span className="text-primary">*</span>
               </Label>
-              <Select
-                value={form.servicio}
-                onValueChange={(v) => setForm({ ...form, servicio: v })}
-              >
+              <Select value={form.servicio} onValueChange={(v) => setForm({ ...form, servicio: v })}>
                 <SelectTrigger
                   id="servicio"
                   aria-invalid={!!errors.servicio}
@@ -231,15 +268,13 @@ export function ContactForm() {
                   ))}
                 </SelectContent>
               </Select>
-              {errors.servicio && (
-                <p className="text-xs text-destructive">{errors.servicio}</p>
-              )}
+              {errors.servicio && <p className="text-xs text-destructive">{errors.servicio}</p>}
             </div>
 
             {/* Mensaje */}
             <div className="flex flex-col gap-2.5 sm:col-span-2">
               <Label htmlFor="mensaje" className="text-sm font-medium text-foreground">
-                Cuentanos sobre tu proyecto
+                Cuéntanos sobre tu proyecto
               </Label>
               <Textarea
                 id="mensaje"
@@ -255,7 +290,13 @@ export function ContactForm() {
               />
             </div>
 
-            {/* Divider */}
+            {/* Server error */}
+            {serverError && (
+              <div className="sm:col-span-2 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+                {serverError}
+              </div>
+            )}
+
             <div className="sm:col-span-2">
               <div className="h-px w-full bg-border" />
             </div>
@@ -265,10 +306,20 @@ export function ContactForm() {
               <Button
                 type="submit"
                 size="lg"
-                className="h-13 w-full rounded-xl text-base font-semibold shadow-lg shadow-primary/20 transition-all hover:shadow-xl hover:shadow-primary/30"
+                disabled={loading}
+                className="h-13 w-full rounded-xl text-base font-semibold shadow-lg shadow-primary/20 transition-all hover:shadow-xl hover:shadow-primary/30 disabled:opacity-70"
               >
-                <Send className="mr-2 h-4 w-4" />
-                Enviar solicitud
+                {loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    <Send className="mr-2 h-4 w-4" />
+                    Enviar solicitud
+                  </>
+                )}
               </Button>
               <p className="mt-3 text-center text-xs text-muted-foreground">
                 Sin compromiso. Respuesta en menos de 24 horas.

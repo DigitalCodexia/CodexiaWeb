@@ -4,8 +4,7 @@ import { useCallback, useEffect, useState } from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const projects = [
   {
@@ -23,7 +22,7 @@ const projects = [
     description:
       "Sitio profesional para distribuidora de ropa de cama y amenities para hoteles, hospitales y clínicas en Panamá.",
     image: "/images/portfolio-horeca.jpeg",
-    href: "https://horecacomfort.com",
+    href: "#",
     tags: ["E-commerce", "Hospitalidad", "Panamá"],
   },
   {
@@ -32,7 +31,7 @@ const projects = [
     description:
       "Presencia digital para empresa familiar con más de 30 años en transporte de contenedores a nivel nacional.",
     image: "/images/portfolio-ventura.jpeg",
-    href: "https://transventura.com",
+    href: "#",
     tags: ["Logística", "Transporte", "Panamá"],
   },
   {
@@ -162,11 +161,6 @@ export function Portfolio() {
                       ))}
                     </div>
 
-                    <Button variant="outline" size="sm" className="mt-5 w-full" asChild>
-                      <a href={project.href} target="_blank" rel="noopener noreferrer">
-                        Ver proyecto <ExternalLink className="ml-2 h-4 w-4" />
-                      </a>
-                    </Button>
                   </div>
                 </div>
               </div>
