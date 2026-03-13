@@ -45,13 +45,13 @@ export function Footer() {
             <ul className="mt-3 flex flex-col gap-3">
               <li>
                 <a
-                  href="https://wa.me/00000000000"
+                  href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=Hola%20CODEXIA%2C%20estoy%20interesado%20en%20sus%20servicios.%20¿Podrían%20proporcionarme%20más%20información%3F`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   <MessageCircle className="h-4 w-4 text-primary" />
-                  +00 000 000 0000
+                  {`${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
                 </a>
               </li>
               <li>
@@ -60,7 +60,7 @@ export function Footer() {
                   className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   <Mail className="h-4 w-4 text-primary" />
-                  digitalcodexia@gmail.com
+                  info@digitalcodexia.com
                 </a>
               </li>
             </ul>
