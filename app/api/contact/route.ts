@@ -27,7 +27,7 @@ function checkRateLimit(ip: string): boolean {
 /**
  * Confirmation email sent to the user (professional, minimal design)
  */
-function getConfirmationEmail(nombre: string, servicio: string): string {
+function getConfirmationEmail(nombre: string, email: string, servicio: string): string {
   const logoUrl = "https://www.digitalcodexia.com/logo.png"
   return `
     <!DOCTYPE html>
@@ -46,30 +46,30 @@ function getConfirmationEmail(nombre: string, servicio: string): string {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f9f9f9;
+            background-color: #f5f7fa;
           }
           .email-container {
             max-width: 600px;
             margin: 0 auto;
             background-color: #ffffff;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
           }
           .header {
-            background-color: #f5f5f5;
-            padding: 32px 24px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+            padding: 40px 24px;
             text-align: center;
-            border-bottom: 1px solid #e5e5e5;
+            color: white;
           }
           .logo {
             height: 48px;
             margin-bottom: 16px;
           }
           .header h1 {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: 600;
-            color: #222;
+            color: white;
             margin: 0;
           }
           .content {
@@ -78,43 +78,60 @@ function getConfirmationEmail(nombre: string, servicio: string): string {
           .content p {
             margin-bottom: 16px;
             color: #555;
-            font-size: 14px;
+            font-size: 15px;
+            line-height: 1.7;
           }
           .highlight {
-            background-color: #f0f0f0;
-            padding: 16px;
-            border-left: 3px solid #7c3aed;
+            background: linear-gradient(135deg, #e0f2fe 0%, #cffafe 100%);
+            padding: 20px;
+            border-left: 4px solid #0ea5e9;
             margin: 24px 0;
-            border-radius: 4px;
+            border-radius: 8px;
           }
           .highlight p {
             margin: 0;
             font-size: 14px;
-            color: #333;
+            color: #0c4a6e;
           }
           .highlight strong {
             display: block;
-            color: #222;
+            color: #0c4a6e;
             font-size: 15px;
             margin-bottom: 8px;
+            font-weight: 600;
           }
           .footer {
-            background-color: #f9f9f9;
+            background-color: #f8fafc;
             padding: 24px;
             text-align: center;
-            border-top: 1px solid #e5e5e5;
+            border-top: 1px solid #e2e8f0;
           }
           .footer p {
             font-size: 12px;
-            color: #888;
+            color: #64748b;
             margin: 0;
           }
           .footer a {
-            color: #7c3aed;
+            color: #0ea5e9;
             text-decoration: none;
+            transition: color 0.2s;
           }
           .footer a:hover {
+            color: #0284c7;
             text-decoration: underline;
+          }
+          .footer-links {
+            margin: 12px 0 0;
+            padding-top: 12px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 11px;
+          }
+          .footer-links a {
+            color: #64748b;
+            margin: 0 4px;
+          }
+          .footer-links a:hover {
+            color: #0ea5e9;
           }
           /* Responsive */
           @media (max-width: 600px) {
@@ -125,10 +142,13 @@ function getConfirmationEmail(nombre: string, servicio: string): string {
               padding: 24px 16px;
             }
             .header {
-              padding: 24px 16px;
+              padding: 32px 16px;
             }
             .footer {
               padding: 20px 16px;
+            }
+            .header h1 {
+              font-size: 20px;
             }
           }
         </style>
@@ -136,8 +156,8 @@ function getConfirmationEmail(nombre: string, servicio: string): string {
       <body>
         <div class="email-container">
           <div class="header">
-            <img src="${logoUrl}" alt="CODEXIA" class="logo">
-            <h1>Solicitud Recibida</h1>
+            <img src="${logoUrl}" alt="Digital Codexia" class="logo">
+            <h1>✓ Solicitud Recibida</h1>
           </div>
           <div class="content">
             <p>Hola <strong>${nombre}</strong>,</p>
@@ -146,11 +166,15 @@ function getConfirmationEmail(nombre: string, servicio: string): string {
               <strong>¿Qué ocurre ahora?</strong>
               <p>Nuestro equipo revisará tu solicitud y se pondrá en contacto contigo dentro de las próximas 24 horas a través de WhatsApp o email.</p>
             </div>
-            <p>Saludos,<br>El equipo de Digital Codexia</p>
+            <p>Saludos,<br><strong>El equipo de Digital Codexia</strong></p>
           </div>
           <div class="footer">
             <p>&copy; 2024 Digital Codexia. Todos los derechos reservados.</p>
-            <p><a href="https://www.digitalcodexia.com">www.digitalcodexia.com</a></p>
+            <p style="margin: 8px 0 0;"><a href="https://www.digitalcodexia.com">www.digitalcodexia.com</a></p>
+            <p class="footer-links">
+              <a href="https://www.digitalcodexia.com/preferencias?email=${email}">Modificar preferencias</a> • 
+              <a href="https://www.digitalcodexia.com/unsubscribe?email=${email}">Dejar de recibir</a>
+            </p>
           </div>
         </div>
       </body>
@@ -180,24 +204,24 @@ function getAdminEmail(nombre: string, negocio: string, email: string, whatsapp:
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f9f9f9;
+            background-color: #f5f7fa;
           }
           .email-container {
             max-width: 600px;
             margin: 0 auto;
             background-color: #ffffff;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
           }
           .header {
-            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-            padding: 32px 24px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+            padding: 40px 24px;
             text-align: center;
             color: white;
           }
           .header h1 {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 600;
             margin: 0;
           }
@@ -211,80 +235,101 @@ function getAdminEmail(nombre: string, negocio: string, email: string, whatsapp:
             display: grid;
             grid-template-columns: 140px 1fr;
             gap: 16px;
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
+            padding: 14px 0;
+            border-bottom: 1px solid #e2e8f0;
+          }
+          .info-row:last-child {
+            border-bottom: none;
           }
           .info-label {
             font-weight: 600;
-            color: #7c3aed;
-            font-size: 13px;
+            color: #0ea5e9;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
           }
           .info-value {
-            color: #333;
+            color: #1e293b;
             font-size: 14px;
             word-break: break-word;
+            line-height: 1.5;
           }
           .info-value a {
-            color: #7c3aed;
+            color: #0ea5e9;
             text-decoration: none;
+            font-weight: 500;
           }
           .info-value a:hover {
             text-decoration: underline;
           }
           .message-box {
-            background-color: #f9f9f9;
-            padding: 16px;
-            border-left: 3px solid #7c3aed;
-            border-radius: 4px;
+            background: linear-gradient(135deg, #e0f2fe 0%, #cffafe 100%);
+            padding: 20px;
+            border-left: 4px solid #0ea5e9;
+            border-radius: 8px;
             margin-top: 24px;
           }
           .message-box h3 {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            color: #7c3aed;
+            color: #0c4a6e;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
           }
           .message-box p {
             font-size: 14px;
-            color: #333;
+            color: #0c4a6e;
             margin: 0;
             white-space: pre-wrap;
             word-wrap: break-word;
+            line-height: 1.6;
           }
           .cta-button {
             display: inline-block;
-            background-color: #7c3aed;
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
             color: white;
-            padding: 12px 24px;
-            border-radius: 6px;
+            padding: 12px 28px;
+            border-radius: 8px;
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
             margin-top: 24px;
-            transition: background-color 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
           }
           .cta-button:hover {
-            background-color: #6d28d9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
           }
           .footer {
-            background-color: #f9f9f9;
+            background-color: #f8fafc;
             padding: 24px;
             text-align: center;
-            border-top: 1px solid #e5e5e5;
+            border-top: 1px solid #e2e8f0;
           }
           .footer p {
             font-size: 12px;
-            color: #888;
+            color: #64748b;
             margin: 0;
           }
           .timestamp {
             font-size: 11px;
-            color: #aaa;
+            color: #94a3b8;
             margin-top: 8px;
+          }
+          .footer-links {
+            margin: 12px 0 0;
+            padding-top: 12px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 11px;
+          }
+          .footer-links a {
+            color: #64748b;
+            text-decoration: none;
+            margin: 0 4px;
+          }
+          .footer-links a:hover {
+            color: #0ea5e9;
           }
           /* Responsive */
           @media (max-width: 600px) {
@@ -295,16 +340,16 @@ function getAdminEmail(nombre: string, negocio: string, email: string, whatsapp:
               padding: 24px 16px;
             }
             .header {
-              padding: 24px 16px;
+              padding: 32px 16px;
             }
             .footer {
               padding: 20px 16px;
             }
-            .info-grid {
-              grid-template-columns: 1fr;
-            }
             .info-row {
               grid-template-columns: 1fr;
+            }
+            .header h1 {
+              font-size: 20px;
             }
           }
         </style>
@@ -350,6 +395,9 @@ function getAdminEmail(nombre: string, negocio: string, email: string, whatsapp:
           <div class="footer">
             <p>Solicitud recibida desde el formulario de contacto de Digital Codexia</p>
             <p class="timestamp">${new Date().toLocaleString("es-ES")}</p>
+            <p class="footer-links">
+              <a href="https://www.digitalcodexia.com/preferencias?email=${process.env.CONTACT_RECIPIENT_EMAIL}">Modificar preferencias de notificaciones</a>
+            </p>
           </div>
         </div>
       </body>
@@ -399,7 +447,7 @@ export async function POST(req: NextRequest) {
       from: process.env.RESEND_FROM_EMAIL!,
       to: [email],
       subject: "Confirmación de tu solicitud — CODEXIA",
-      html: getConfirmationEmail(nombre, servicio),
+      html: getConfirmationEmail(nombre, email, servicio),
     })
 
     // ── Send admin notification ──────────────────────────────────────────
