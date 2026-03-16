@@ -7,11 +7,11 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 const siteConfig = {
-  name: 'CODEXIA',
+  name: 'CODEXIA PANAMA',
   url: 'https://www.digitalcodexia.com', // Reemplaza con tu dominio final
   description: 'Creamos tiendas online, páginas web, landing pages y aplicaciones web a medida para que tu negocio venda 24/7.',
   logo: 'https://www.digitalcodexia.com/logo.png', // Reemplaza con tu dominio final
-  ogImage: 'https://www.digitalcodexia.com/og-image.png', // Reemplaza con tu dominio final
+  ogImage: 'https://www.digitalcodexia.com/logo.png', // Reemplaza con tu dominio final
 };
 
 export const metadata: Metadata = {
