@@ -6,41 +6,20 @@ import Autoplay from "embla-carousel-autoplay"
 import Image from "next/image"
 import { Zap, Palette, TrendingUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const bullets = [
-  { icon: Zap, text: "Entrega rápida" },
-  { icon: Palette, text: "Diseño profesional" },
-  { icon: TrendingUp, text: "Optimizado para ventas" },
-]
+import { useLanguage } from "@/context/language-context"
 
 const slides = [
-  {
-    image: "/images/portfolio-it.jpeg",
-    label: "Dashboard / App Web",
-  },
-  {
-    image: "/images/portfolio-horeca.jpeg",
-    label: "Sitio Web Corporativo",
-  },
-  {
-    image: "/images/portfolio-ventura.jpeg",
-    label: "Sitio Web Corporativo",
-  },
-  {
-    image: "/images/portfolio-blog.png",
-    label: "Blog / Contenido",
-  },
-  // {
-  //   image: "/images/portfolio-boda.png",
-  //   label: "Landing Page",
-  // },
-  {
-    image: "/images/portfolio-planilla.jpeg",
-    label: "App Web / Sistema",
-  },
+  { image: "/images/portfolio-it.jpeg", label: "Dashboard / App Web" },
+  { image: "/images/portfolio-horeca.jpeg", label: "Sitio Web Corporativo" },
+  { image: "/images/portfolio-ventura.jpeg", label: "Sitio Web Corporativo" },
+  { image: "/images/portfolio-blog.png", label: "Blog / Contenido" },
+  { image: "/images/portfolio-planilla.jpeg", label: "App Web / Sistema" },
 ]
 
+const bulletIcons = [Zap, Palette, TrendingUp]
+
 export function Hero() {
+  const { t } = useLanguage()
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 3500, stopOnInteraction: false }),
   ])
@@ -52,6 +31,12 @@ export function Hero() {
     if (!emblaApi) return
     emblaApi.on("select", () => setSelectedIndex(emblaApi.selectedScrollSnap()))
   }, [emblaApi])
+
+  const bullets = [
+    { icon: bulletIcons[0], text: t.hero.bullet1 },
+    { icon: bulletIcons[1], text: t.hero.bullet2 },
+    { icon: bulletIcons[2], text: t.hero.bullet3 },
+  ]
 
   return (
     <section className="relative overflow-hidden py-20 lg:py-32">
@@ -73,34 +58,33 @@ export function Hero() {
             ))}
           </div>
         </div>
-        {/* Dark overlay so text stays readable */}
+        {/* Overlay so text stays readable */}
         <div className="absolute inset-0 bg-background/80" />
-        {/* Radial tint from original hero */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/15 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-primary/15 via-transparent to-transparent" />
       </div>
 
       {/* ── Content ── */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Impulsa tu Negocio con Soluciones, Automatizaciones, Sistemas Web y Aplicaciones
+            {t.hero.heading}
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
-            Tiendas online, páginas web, landing pages y aplicaciones web. Diseño moderno + velocidad + conversión.
+            {t.hero.subheading}
           </p>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button size="lg" asChild>
               <a
-                href="https://wa.me/00000000000?text=Hola%20CODEXIA%2C%20quiero%20una%20asesor%C3%ADa%20gratuita%20para%20mi%20negocio."
+                href="https://wa.me/50763666033?text=Hola%20CODEXIA%2C%20quiero%20una%20asesor%C3%ADa%20gratuita%20para%20mi%20negocio."
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Agenda tu asesoría gratis
+                {t.hero.ctaPrimary}
               </a>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <a href="#servicios">Ver servicios</a>
+              <a href="/services">{t.hero.ctaSecondary}</a>
             </Button>
           </div>
 

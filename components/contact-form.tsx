@@ -13,15 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Send, CheckCircle2, User, Building2, Mail, Phone, MessageSquare, Loader2 } from "lucide-react"
-
-const serviceOptions = [
-  "Tienda Online",
-  "Pagina Web",
-  "Landing Page",
-  "Aplicacion Web",
-  "Automatizacion",
-  "Otro",
-]
+import { useLanguage } from "@/context/language-context"
 
 interface FormData {
   nombre: string
@@ -30,10 +22,13 @@ interface FormData {
   whatsapp: string
   servicio: string
   mensaje: string
-  website: string // honeypot — invisible to real users
+  website: string // honeypot
 }
 
 export function ContactForm() {
+  const { t } = useLanguage()
+  const c = t.contact
+
   const [form, setForm] = useState<FormData>({
     nombre: "",
     negocio: "",
@@ -51,14 +46,14 @@ export function ContactForm() {
 
   function validate(): boolean {
     const newErrors: Partial<Record<keyof FormData, string>> = {}
-    if (!form.nombre.trim()) newErrors.nombre = "Tu nombre es requerido"
+    if (!form.nombre.trim()) newErrors.nombre = c.errors.nombre
     if (!form.email.trim()) {
-      newErrors.email = "Tu email es requerido"
+      newErrors.email = c.errors.emailRequired
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      newErrors.email = "Ingresa un email válido"
+      newErrors.email = c.errors.emailInvalid
     }
-    if (!form.whatsapp.trim()) newErrors.whatsapp = "Tu WhatsApp es requerido"
-    if (!form.servicio) newErrors.servicio = "Selecciona un servicio"
+    if (!form.whatsapp.trim()) newErrors.whatsapp = c.errors.whatsapp
+    if (!form.servicio) newErrors.servicio = c.errors.servicio
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -66,9 +61,7 @@ export function ContactForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!validate()) return
-
-    // Honeypot: if filled, silently drop (bot detected)
-    if (form.website) return
+    if (form.website) return // honeypot
 
     setLoading(true)
     setServerError(null)
@@ -83,13 +76,13 @@ export function ContactForm() {
       const data = await res.json()
 
       if (!res.ok) {
-        setServerError(data.error ?? "Error al enviar. Intenta de nuevo.")
+        setServerError(data.error ?? c.serverError)
         return
       }
 
       setSubmitted(true)
     } catch {
-      setServerError("Error de conexión. Intenta de nuevo.")
+      setServerError(c.connectionError)
     } finally {
       setLoading(false)
     }
@@ -98,20 +91,16 @@ export function ContactForm() {
   if (submitted) {
     return (
       <section id="contacto" className="relative overflow-hidden py-20 lg:py-28">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-card to-background" />
+        <div className="absolute inset-0 bg-linear-to-b from-background via-card to-background" />
         <div className="relative mx-auto max-w-lg px-4 text-center lg:px-8">
           <div className="rounded-2xl border border-border bg-card/80 p-10 backdrop-blur-sm">
             <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/15">
               <CheckCircle2 className="h-10 w-10 text-primary" />
             </div>
-            <h3 className="mt-6 text-2xl font-bold text-foreground">Mensaje enviado con éxito</h3>
-            <p className="mt-3 text-muted-foreground leading-relaxed">
-              Gracias por tu interés. Nuestro equipo revisará tu solicitud y te contactará en menos de 24 horas.
-            </p>
-            <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-            <p className="mt-4 text-sm text-muted-foreground">
-              Mientras tanto, puedes explorar nuestros servicios
-            </p>
+            <h3 className="mt-6 text-2xl font-bold text-foreground">{c.successTitle}</h3>
+            <p className="mt-3 text-muted-foreground leading-relaxed">{c.successDesc}</p>
+            <div className="mt-6 h-px w-full bg-linear-to-r from-transparent via-primary/40 to-transparent" />
+            <p className="mt-4 text-sm text-muted-foreground">{c.successNote}</p>
           </div>
         </div>
       </section>
@@ -120,8 +109,8 @@ export function ContactForm() {
 
   return (
     <section id="contacto" className="relative overflow-hidden py-20 lg:py-28">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-card to-background" />
-      <div className="absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-b from-background via-card to-background" />
+      <div className="absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-linear-to-r from-transparent via-primary/30 to-transparent" />
 
       <div className="relative mx-auto max-w-3xl px-4 lg:px-8">
         {/* Header */}
@@ -129,14 +118,14 @@ export function ContactForm() {
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5">
             <MessageSquare className="h-3.5 w-3.5 text-primary" />
             <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-              Contacto
+              {c.eyebrow}
             </span>
           </div>
           <h2 className="mt-5 text-balance text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
-            Hablemos de tu proyecto
+            {c.heading}
           </h2>
           <p className="mx-auto mt-4 max-w-md text-muted-foreground leading-relaxed">
-            Completa el formulario y recibe una propuesta personalizada sin compromiso.
+            {c.subheading}
           </p>
         </div>
 
@@ -144,7 +133,7 @@ export function ContactForm() {
         <div className="mt-12 rounded-2xl border border-border bg-card/60 p-6 backdrop-blur-sm sm:p-10">
           <form onSubmit={handleSubmit} className="grid gap-6 sm:grid-cols-2" noValidate>
 
-            {/* ── HONEYPOT (invisible to humans, visible to bots) ── */}
+            {/* Honeypot */}
             <div
               aria-hidden="true"
               style={{ position: "absolute", left: "-9999px", top: "-9999px", height: 0, width: 0, overflow: "hidden", opacity: 0 }}
@@ -166,11 +155,11 @@ export function ContactForm() {
             <div className="flex flex-col gap-2.5">
               <Label htmlFor="nombre" className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <User className="h-3.5 w-3.5 text-muted-foreground" />
-                Nombre <span className="text-primary">*</span>
+                {c.fields.nombre} <span className="text-primary">*</span>
               </Label>
               <Input
                 id="nombre"
-                placeholder="Tu nombre completo"
+                placeholder={c.fields.nombrePlaceholder}
                 value={form.nombre}
                 onChange={(e) => setForm({ ...form, nombre: e.target.value })}
                 onFocus={() => setFocused("nombre")}
@@ -187,11 +176,11 @@ export function ContactForm() {
             <div className="flex flex-col gap-2.5">
               <Label htmlFor="negocio" className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <Building2 className="h-3.5 w-3.5 text-muted-foreground" />
-                Negocio
+                {c.fields.negocio}
               </Label>
               <Input
                 id="negocio"
-                placeholder="Nombre de tu empresa"
+                placeholder={c.fields.negocioPlaceholder}
                 value={form.negocio}
                 onChange={(e) => setForm({ ...form, negocio: e.target.value })}
                 onFocus={() => setFocused("negocio")}
@@ -206,7 +195,7 @@ export function ContactForm() {
             <div className="flex flex-col gap-2.5">
               <Label htmlFor="email" className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <Mail className="h-3.5 w-3.5 text-muted-foreground" />
-                Email <span className="text-primary">*</span>
+                {c.fields.email} <span className="text-primary">*</span>
               </Label>
               <Input
                 id="email"
@@ -228,11 +217,11 @@ export function ContactForm() {
             <div className="flex flex-col gap-2.5">
               <Label htmlFor="whatsapp" className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <Phone className="h-3.5 w-3.5 text-muted-foreground" />
-                WhatsApp <span className="text-primary">*</span>
+                {c.fields.whatsapp} <span className="text-primary">*</span>
               </Label>
               <Input
                 id="whatsapp"
-                placeholder="+507 0000-0000"
+                placeholder="+50763666033"
                 value={form.whatsapp}
                 onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
                 onFocus={() => setFocused("whatsapp")}
@@ -248,7 +237,7 @@ export function ContactForm() {
             {/* Servicio */}
             <div className="flex flex-col gap-2.5 sm:col-span-2">
               <Label htmlFor="servicio" className="text-sm font-medium text-foreground">
-                Servicio de interés <span className="text-primary">*</span>
+                {c.fields.servicio} <span className="text-primary">*</span>
               </Label>
               <Select value={form.servicio} onValueChange={(v) => setForm({ ...form, servicio: v })}>
                 <SelectTrigger
@@ -258,10 +247,10 @@ export function ContactForm() {
                     errors.servicio ? "border-destructive" : ""
                   }`}
                 >
-                  <SelectValue placeholder="Selecciona un servicio" />
+                  <SelectValue placeholder={c.fields.servicioPlaceholder} />
                 </SelectTrigger>
                 <SelectContent className="rounded-xl border-border bg-card">
-                  {serviceOptions.map((option) => (
+                  {c.serviceOptions.map((option) => (
                     <SelectItem key={option} value={option} className="rounded-lg">
                       {option}
                     </SelectItem>
@@ -274,11 +263,11 @@ export function ContactForm() {
             {/* Mensaje */}
             <div className="flex flex-col gap-2.5 sm:col-span-2">
               <Label htmlFor="mensaje" className="text-sm font-medium text-foreground">
-                Cuéntanos sobre tu proyecto
+                {c.fields.mensaje}
               </Label>
               <Textarea
                 id="mensaje"
-                placeholder="Describe brevemente lo que necesitas: tipo de proyecto, funcionalidades, plazos..."
+                placeholder={c.fields.mensajePlaceholder}
                 rows={4}
                 value={form.mensaje}
                 onChange={(e) => setForm({ ...form, mensaje: e.target.value })}
@@ -312,17 +301,17 @@ export function ContactForm() {
                 {loading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Enviando...
+                    {c.submitting}
                   </>
                 ) : (
                   <>
                     <Send className="mr-2 h-4 w-4" />
-                    Enviar solicitud
+                    {c.submit}
                   </>
                 )}
               </Button>
               <p className="mt-3 text-center text-xs text-muted-foreground">
-                Sin compromiso. Respuesta en menos de 24 horas.
+                {c.disclaimer}
               </p>
             </div>
           </form>

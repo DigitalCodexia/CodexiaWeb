@@ -1,95 +1,129 @@
 "use client"
 
 import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import Link from "next/link"
+import { Menu, X, Languages } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const navLinks = [
-  { label: "Servicios", href: "#servicios" },
-  { label: "Proceso", href: "#proceso" },
-  { label: "Portafolio", href: "#portafolio" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contacto", href: "#contacto" },
-]
+import { ThemeToggle } from "@/components/theme-toggle"
+import { useLanguage } from "@/context/language-context"
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { t, locale, toggleLocale } = useLanguage()
+
+  const navLinks = [
+    { label: t.nav.home, href: "/" },
+    { label: t.nav.services, href: "/services" },
+    { label: t.nav.portfolio, href: "/portfolio" },
+    { label: t.nav.faq, href: "/faq" },
+    { label: t.nav.contact, href: "/contact" },
+  ]
 
   return (
     <>
       {/* Promo Banner */}
       <div className="bg-primary text-primary-foreground text-center py-2 text-sm font-medium">
-        Asesoria gratis esta semana
+        {t.nav.promoBanner}
       </div>
 
       <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8" aria-label="Navegación principal">
           {/* Logo */}
-          <a href="#" className="text-xl font-bold tracking-tight text-foreground">
+          <Link href="/" className="text-xl font-bold tracking-tight text-foreground" aria-label="CODEXIA - Inicio">
             {"CODEXIA"}
-          </a>
+          </Link>
 
           {/* Desktop Links */}
-          <ul className="hidden items-center gap-6 md:flex">
+          <ul className="hidden items-center gap-6 md:flex" role="list">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex">
+          {/* Desktop Controls */}
+          <div className="hidden md:flex items-center gap-2">
+            {/* Language Toggle */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleLocale}
+              aria-label={t.lang.label}
+              className="h-9 px-2 gap-1 text-xs font-semibold"
+            >
+              <Languages className="h-4 w-4" />
+              {t.lang.switch}
+            </Button>
+
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
+            {/* CTA */}
             <Button asChild>
               <a
-                href="https://wa.me/00000000000?text=Hola%20CODEXIA%2C%20quiero%20una%20asesor%C3%ADa%20gratuita%20para%20mi%20negocio."
+                href="https://wa.me/50763666033?text=Hola%20CODEXIA%2C%20quiero%20una%20asesor%C3%ADa%20gratuita%20para%20mi%20negocio."
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Agenda tu asesoria
+                {t.nav.cta}
               </a>
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="text-foreground md:hidden"
-            aria-label={mobileOpen ? "Cerrar menu" : "Abrir menu"}
-          >
-            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          {/* Mobile Controls */}
+          <div className="flex items-center gap-1 md:hidden">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleLocale}
+              aria-label={t.lang.label}
+              className="h-9 px-2 text-xs font-semibold"
+            >
+              <Languages className="h-4 w-4" />
+            </Button>
+            <ThemeToggle />
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="text-foreground p-1"
+              aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav"
+            >
+              {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </nav>
 
         {/* Mobile Nav */}
         {mobileOpen && (
-          <div className="border-t border-border bg-background px-4 pb-4 md:hidden">
-            <ul className="flex flex-col gap-3 pt-3">
+          <div id="mobile-nav" className="border-t border-border bg-background px-4 pb-4 md:hidden">
+            <ul className="flex flex-col gap-3 pt-3" role="list">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     className="block py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                     onClick={() => setMobileOpen(false)}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
             <div className="mt-3">
               <Button asChild className="w-full">
                 <a
-                  href="https://wa.me/00000000000?text=Hola%20CODEXIA%2C%20quiero%20una%20asesor%C3%ADa%20gratuita%20para%20mi%20negocio."
+                  href="https://wa.me/50763666033?text=Hola%20CODEXIA%2C%20quiero%20una%20asesor%C3%ADa%20gratuita%20para%20mi%20negocio."
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Agenda tu asesoria
+                  {t.nav.cta}
                 </a>
               </Button>
             </div>

@@ -1,40 +1,38 @@
 import { MetadataRoute } from 'next'
 
-const siteConfig = {
-  url: 'https://www.digitalcodexia.com', // Reemplaza con tu dominio final
-};
+const BASE_URL = 'https://www.digitalcodexia.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: siteConfig.url,
+      url: BASE_URL,
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: 'weekly',
       priority: 1,
     },
     {
-      url: `${siteConfig.url}/about`, // Ejemplo de página, ajusta según tus rutas
+      url: `${BASE_URL}/services`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/portfolio`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${siteConfig.url}/services`, // Ejemplo de página, ajusta según tus rutas
+      url: `${BASE_URL}/faq`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: 0.7,
     },
     {
-      url: `${siteConfig.url}/portfolio`, // Ejemplo de página, ajusta según tus rutas
+      url: `${BASE_URL}/contact`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${siteConfig.url}/contact`, // Ejemplo de página, ajusta según tus rutas
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.5,
+      changeFrequency: 'yearly',
+      priority: 0.6,
     },
   ]
 }
