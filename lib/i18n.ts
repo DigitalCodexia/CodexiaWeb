@@ -13,7 +13,7 @@ export const translations = {
       promoBanner: 'Asesoría gratis esta semana',
     },
     hero: {
-      heading: 'Impulsa tu Negocio con Soluciones, Automatizaciones, Sistemas Web y Aplicaciones',
+      heading: 'Soluciones Digitales que Hacen Crecer tu Negocio',
       subheading: 'Tiendas online, páginas web, landing pages y aplicaciones web. Diseño moderno + velocidad + conversión.',
       ctaPrimary: 'Agenda tu asesoría gratis',
       ctaSecondary: 'Ver servicios',
@@ -289,7 +289,7 @@ export const translations = {
       promoBanner: 'Free consultation this week',
     },
     hero: {
-      heading: 'Boost Your Business with Solutions, Automations, Web Systems and Applications',
+      heading: 'Digital Solutions That Grow Your Business',
       subheading: 'Online stores, websites, landing pages and web applications. Modern design + speed + conversion.',
       ctaPrimary: 'Book your free consultation',
       ctaSecondary: 'View services',
