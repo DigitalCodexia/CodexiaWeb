@@ -1,9 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Zap, Palette, TrendingUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/context/language-context"
+import { gsap } from "gsap"
 
 const accordionItems = [
   { id: 1, image: "/images/portfolio-it.jpeg",       label: "Dashboard / App Web" },
@@ -19,11 +20,50 @@ export function Hero() {
   const { t } = useLanguage()
   const [activeIndex, setActiveIndex] = useState(4)
 
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const subRef = useRef<HTMLParagraphElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+  const bulletsRef = useRef<HTMLDivElement>(null)
+  const accordionRef = useRef<HTMLDivElement>(null)
+
   const bullets = [
     { icon: bulletIcons[0], text: t.hero.bullet1 },
     { icon: bulletIcons[1], text: t.hero.bullet2 },
     { icon: bulletIcons[2], text: t.hero.bullet3 },
   ]
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } })
+
+      tl.fromTo(headingRef.current,
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 0.8 }
+      )
+      .fromTo(subRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.6 },
+        "-=0.5"
+      )
+      .fromTo(ctaRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5 },
+        "-=0.4"
+      )
+      .fromTo(bulletsRef.current,
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.5 },
+        "-=0.3"
+      )
+      .fromTo(accordionRef.current,
+        { opacity: 0, x: 60, scale: 0.96 },
+        { opacity: 1, x: 0, scale: 1, duration: 0.9, ease: "power2.out" },
+        "-=0.6"
+      )
+    })
+
+    return () => ctx.revert()
+  }, [])
 
   return (
     <section className="bg-background overflow-hidden">
@@ -32,14 +72,26 @@ export function Hero() {
 
           {/* ── Left: text ── */}
           <div className="w-full lg:w-[45%] text-center lg:text-left shrink-0">
-            <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-5xl xl:text-6xl text-balance leading-tight">
+            <h1
+              ref={headingRef}
+              className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-5xl xl:text-6xl text-balance leading-tight"
+              style={{ opacity: 0 }}
+            >
               {t.hero.heading}
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-muted-foreground max-w-lg mx-auto lg:mx-0">
+            <p
+              ref={subRef}
+              className="mt-5 text-lg leading-relaxed text-muted-foreground max-w-lg mx-auto lg:mx-0"
+              style={{ opacity: 0 }}
+            >
               {t.hero.subheading}
             </p>
 
-            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row lg:justify-start justify-center">
+            <div
+              ref={ctaRef}
+              className="mt-8 flex flex-col items-center gap-3 sm:flex-row lg:justify-start justify-center"
+              style={{ opacity: 0 }}
+            >
               <Button size="lg" asChild>
                 <a
                   href="https://wa.me/50763666033?text=Hola%20CODEXIA%2C%20quiero%20una%20asesor%C3%ADa%20gratuita%20para%20mi%20negocio."
@@ -54,7 +106,11 @@ export function Hero() {
               </Button>
             </div>
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-5 lg:justify-start">
+            <div
+              ref={bulletsRef}
+              className="mt-10 flex flex-wrap items-center justify-center gap-5 lg:justify-start"
+              style={{ opacity: 0 }}
+            >
               {bullets.map((item) => (
                 <div key={item.text} className="flex items-center gap-2">
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
@@ -68,7 +124,11 @@ export function Hero() {
 
           {/* ── Right: image accordion ── */}
           <div className="w-full lg:w-[55%] flex justify-center lg:justify-end">
-            <div className="flex flex-row items-stretch gap-2 h-90 lg:h-110">
+            <div
+              ref={accordionRef}
+              className="flex flex-row items-stretch gap-2 h-90 lg:h-110"
+              style={{ opacity: 0 }}
+            >
               {accordionItems.map((item, index) => (
                 <div
                   key={item.id}

@@ -3,7 +3,9 @@
     "allow": [
       "Bash(vercel --version)",
       "Bash(npx vercel:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(mkdir -p c:/Proyectos/Codexia/app/cobranza)",
+      "Bash(mkdir -p c:/Proyectos/Codexia/components/cobranza)"
     ]
   }
 }

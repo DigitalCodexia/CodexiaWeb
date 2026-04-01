@@ -55,6 +55,12 @@ export function Navbar() {
             >
               {t.nav.planilla}
             </Link>
+            <Link
+              href="/cobros"
+              className="text-sm font-semibold text-primary border border-primary/40 rounded-full px-4 py-1.5 hover:bg-primary/10 transition-colors"
+            >
+              {t.nav.cobranza}
+            </Link>
             {/* Language Toggle */}
             <Button
               variant="ghost"
@@ -129,6 +135,13 @@ export function Navbar() {
                 onClick={() => setMobileOpen(false)}
               >
                 {t.nav.planilla}
+              </Link>
+              <Link
+                href="/cobros"
+                className="block w-full text-center rounded-lg border border-primary/40 py-2 text-sm font-semibold text-primary hover:bg-primary/10 transition-colors mb-2"
+                onClick={() => setMobileOpen(false)}
+              >
+                {t.nav.cobranza}
               </Link>
             </div>
             <div className="mt-1">
