@@ -1,36 +1,23 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
-import useEmblaCarousel from "embla-carousel-react"
-import Autoplay from "embla-carousel-autoplay"
-import Image from "next/image"
+import { useState } from "react"
 import { Zap, Palette, TrendingUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/context/language-context"
 
-const slides = [
-  { image: "/images/portfolio-it.jpeg", label: "Dashboard / App Web" },
-  { image: "/images/portfolio-horeca.jpeg", label: "Sitio Web Corporativo" },
-  { image: "/images/portfolio-ventura.jpeg", label: "Sitio Web Corporativo" },
-  { image: "/images/portfolio-blog.png", label: "Blog / Contenido" },
-  { image: "/images/portfolio-planilla.jpeg", label: "App Web / Sistema" },
+const accordionItems = [
+  { id: 1, image: "/images/portfolio-it.jpeg",       label: "Dashboard / App Web" },
+  { id: 2, image: "/images/portfolio-horeca.jpeg",   label: "Sitio Web Corporativo" },
+  { id: 3, image: "/images/portfolio-ventura.jpeg",  label: "Transporte & Logística" },
+  { id: 4, image: "/images/portfolio-blog.png",      label: "Blog / Contenido" },
+  { id: 5, image: "/images/portfolio-planilla.jpeg", label: "App Web / Sistema" },
 ]
 
 const bulletIcons = [Zap, Palette, TrendingUp]
 
 export function Hero() {
   const { t } = useLanguage()
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 3500, stopOnInteraction: false }),
-  ])
-  const [selectedIndex, setSelectedIndex] = useState(0)
-
-  const scrollTo = useCallback((index: number) => emblaApi?.scrollTo(index), [emblaApi])
-
-  useEffect(() => {
-    if (!emblaApi) return
-    emblaApi.on("select", () => setSelectedIndex(emblaApi.selectedScrollSnap()))
-  }, [emblaApi])
+  const [activeIndex, setActiveIndex] = useState(4)
 
   const bullets = [
     { icon: bulletIcons[0], text: t.hero.bullet1 },
@@ -39,81 +26,93 @@ export function Hero() {
   ]
 
   return (
-    <section className="relative overflow-hidden py-20 lg:py-32">
+    <section className="bg-background">
+      <div className="container mx-auto px-4 py-16 lg:py-28">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
 
-      {/* ── Background carousel ── */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="h-full overflow-hidden" ref={emblaRef}>
-          <div className="flex h-full">
-            {slides.map((slide, i) => (
-              <div key={i} className="relative h-full min-w-full flex-shrink-0">
-                <Image
-                  src={slide.image}
-                  alt={slide.label}
-                  fill
-                  className="object-cover object-top scale-105 blur-sm"
-                  priority={i === 0}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-        {/* Overlay so text stays readable */}
-        <div className="absolute inset-0 bg-background/80" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-primary/15 via-transparent to-transparent" />
-      </div>
+          {/* ── Left: text ── */}
+          <div className="w-full lg:w-1/2 text-center lg:text-left">
+            <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl text-balance">
+              {t.hero.heading}
+            </h1>
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground max-w-xl mx-auto lg:mx-0">
+              {t.hero.subheading}
+            </p>
 
-      {/* ── Content ── */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            {t.hero.heading}
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
-            {t.hero.subheading}
-          </p>
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
+              <Button size="lg" asChild>
+                <a
+                  href="https://wa.me/50763666033?text=Hola%20CODEXIA%2C%20quiero%20una%20asesor%C3%ADa%20gratuita%20para%20mi%20negocio."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t.hero.ctaPrimary}
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <a href="/services">{t.hero.ctaSecondary}</a>
+              </Button>
+            </div>
 
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button size="lg" asChild>
-              <a
-                href="https://wa.me/50763666033?text=Hola%20CODEXIA%2C%20quiero%20una%20asesor%C3%ADa%20gratuita%20para%20mi%20negocio."
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t.hero.ctaPrimary}
-              </a>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <a href="/services">{t.hero.ctaSecondary}</a>
-            </Button>
-          </div>
-
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-8">
-            {bullets.map((item) => (
-              <div key={item.text} className="flex items-center gap-2">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15 text-primary">
-                  <item.icon className="h-5 w-5" />
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
+              {bullets.map((item) => (
+                <div key={item.text} className="flex items-center gap-2">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                    <item.icon className="h-5 w-5" />
+                  </div>
+                  <span className="text-sm font-medium text-foreground">{item.text}</span>
                 </div>
-                <span className="text-sm font-medium text-foreground">{item.text}</span>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
-          {/* Dot indicators */}
-          <div className="mt-10 flex justify-center gap-2">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => scrollTo(index)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  index === selectedIndex
-                    ? "w-6 bg-primary"
-                    : "w-1.5 bg-border hover:bg-primary/40"
-                }`}
-                aria-label={`Slide ${index + 1}`}
-              />
-            ))}
+          {/* ── Right: image accordion ── */}
+          <div className="w-full lg:w-1/2 flex justify-center">
+            <div className="flex flex-row items-center gap-2 overflow-x-auto pb-2">
+              {accordionItems.map((item, index) => (
+                <div
+                  key={item.id}
+                  className={`
+                    relative h-[420px] rounded-2xl overflow-hidden cursor-pointer flex-shrink-0
+                    transition-all duration-700 ease-in-out
+                    ${activeIndex === index ? "w-[320px]" : "w-[52px]"}
+                  `}
+                  onMouseEnter={() => setActiveIndex(index)}
+                >
+                  {/* Background image */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={item.image}
+                    alt={item.label}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-black/40" />
+                  {/* Gradient bottom */}
+                  <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent" />
+
+                  {/* Label */}
+                  <span
+                    className={`
+                      absolute text-white text-sm font-semibold whitespace-nowrap transition-all duration-300
+                      ${activeIndex === index
+                        ? "bottom-5 left-1/2 -translate-x-1/2 rotate-0"
+                        : "bottom-20 left-1/2 -translate-x-1/2 rotate-90"
+                      }
+                    `}
+                  >
+                    {item.label}
+                  </span>
+
+                  {/* Active indicator dot */}
+                  {activeIndex === index && (
+                    <div className="absolute top-4 right-4 h-2 w-2 rounded-full bg-primary" />
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
+
         </div>
       </div>
     </section>

@@ -49,6 +49,12 @@ export function Navbar() {
 
           {/* Desktop Controls */}
           <div className="hidden md:flex items-center gap-2">
+            <Link
+              href="/planilla"
+              className="text-sm font-semibold text-primary border border-primary/40 rounded-full px-4 py-1.5 hover:bg-primary/10 transition-colors"
+            >
+              {t.nav.planilla}
+            </Link>
             {/* Language Toggle */}
             <Button
               variant="ghost"
@@ -117,6 +123,15 @@ export function Navbar() {
               ))}
             </ul>
             <div className="mt-3">
+              <Link
+                href="/planilla"
+                className="block w-full text-center rounded-lg border border-primary/40 py-2 text-sm font-semibold text-primary hover:bg-primary/10 transition-colors mb-2"
+                onClick={() => setMobileOpen(false)}
+              >
+                {t.nav.planilla}
+              </Link>
+            </div>
+            <div className="mt-1">
               <Button asChild className="w-full">
                 <a
                   href="https://wa.me/50763666033?text=Hola%20CODEXIA%2C%20quiero%20una%20asesor%C3%ADa%20gratuita%20para%20mi%20negocio."
