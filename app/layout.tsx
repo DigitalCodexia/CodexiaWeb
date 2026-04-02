@@ -96,10 +96,31 @@ export const viewport: Viewport = {
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': ['Organization', 'LocalBusiness'],
   name: siteConfig.name,
+  alternateName: 'CODEXIA',
   url: siteConfig.url,
   logo: siteConfig.logo,
+  image: siteConfig.ogImage,
+  description: siteConfig.description,
+  priceRange: '$$',
+  currenciesAccepted: 'USD',
+  paymentAccepted: 'Cash, Credit Card, Bank Transfer',
+  areaServed: [
+    { '@type': 'Country', name: 'Panama' },
+    { '@type': 'AdministrativeArea', name: 'Ciudad de Panama' },
+  ],
+  knowsAbout: [
+    'Desarrollo Web',
+    'E-commerce',
+    'Aplicaciones Web',
+    'Landing Pages',
+    'SEO',
+    'Diseño Web',
+    'Transformación Digital',
+    'Software de Planilla',
+    'Sistema de Cobros',
+  ],
   sameAs: [
     'https://www.instagram.com/codexiadigital',
     'https://www.facebook.com/codexiadigital',
@@ -110,12 +131,19 @@ const jsonLd = {
     contactType: 'Customer Service',
     areaServed: 'PA',
     availableLanguage: ['Spanish', 'English'],
+    contactOption: 'TollFree',
   },
   address: {
     '@type': 'PostalAddress',
     addressCountry: 'PA',
     addressRegion: 'Panama',
+    addressLocality: 'Ciudad de Panama',
   },
+  founder: {
+    '@type': 'Person',
+    name: 'CODEXIA Team',
+  },
+  foundingDate: '2023',
 }
 
 export default function RootLayout({

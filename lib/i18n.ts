@@ -14,7 +14,7 @@ export const translations = {
       promoBanner: 'Asesoría gratis esta semana',
     },
     hero: {
-      heading: 'Soluciones Digitales que Hacen Crecer tu Negocio',
+      heading: 'Soluciones Digitales que Hacen Crecer tu Negocio en Panamá',
       subheading: 'Tiendas online, páginas web, landing pages y aplicaciones web. Diseño moderno + velocidad + conversión.',
       ctaPrimary: 'Agenda tu asesoría gratis',
       ctaSecondary: 'Ver servicios',
@@ -118,6 +118,18 @@ export const translations = {
         {
           question: '¿Cómo se paga?',
           answer: 'Trabajamos con un esquema de anticipo del 50% para iniciar y el 50% restante al finalizar. Aceptamos transferencia bancaria, depósito y otros métodos. Todo queda documentado.',
+        },
+        {
+          question: '¿Cuánto cuesta una página web en Panamá?',
+          answer: 'El costo depende del tipo de proyecto. Una landing page parte desde $300 USD, una página web corporativa desde $500 USD, una tienda online desde $1,000 USD y una aplicación web se cotiza según requerimientos. Agenda una asesoría gratuita para recibir una propuesta personalizada.',
+        },
+        {
+          question: '¿Trabajan con negocios fuera de Ciudad de Panamá?',
+          answer: 'Sí. Trabajamos con clientes en toda la República de Panamá y otros países de Latinoamérica. Todo el proceso es 100% remoto.',
+        },
+        {
+          question: '¿Hacen mantenimiento y soporte después del lanzamiento?',
+          answer: 'Sí. Acompañamos a nuestros clientes con soporte técnico post-lanzamiento para actualizaciones, corrección de errores y mejoras continuas.',
         },
       ],
     },
@@ -291,7 +303,7 @@ export const translations = {
       promoBanner: 'Free consultation this week',
     },
     hero: {
-      heading: 'Digital Solutions That Grow Your Business',
+      heading: 'Digital Solutions That Grow Your Business in Panama',
       subheading: 'Online stores, websites, landing pages and web applications. Modern design + speed + conversion.',
       ctaPrimary: 'Book your free consultation',
       ctaSecondary: 'View services',

@@ -5,7 +5,11 @@
       "Bash(npx vercel:*)",
       "Bash(npm install:*)",
       "Bash(mkdir -p c:/Proyectos/Codexia/app/cobranza)",
-      "Bash(mkdir -p c:/Proyectos/Codexia/components/cobranza)"
+      "Bash(mkdir -p c:/Proyectos/Codexia/components/cobranza)",
+      "WebFetch(domain:www.digitalcodexia.com)",
+      "Bash(del \"c:\\\\Proyectos\\\\Codexia\\\\app\\\\opengraph-image.tsx\")",
+      "Bash(ls c:/Proyectos/Codexia/app/sitemap*)",
+      "Bash(ls c:/Proyectos/Codexia/app/robots*)"
     ]
   }
 }
