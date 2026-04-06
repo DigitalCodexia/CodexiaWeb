@@ -9,7 +9,8 @@
       "WebFetch(domain:www.digitalcodexia.com)",
       "Bash(del \"c:\\\\Proyectos\\\\Codexia\\\\app\\\\opengraph-image.tsx\")",
       "Bash(ls c:/Proyectos/Codexia/app/sitemap*)",
-      "Bash(ls c:/Proyectos/Codexia/app/robots*)"
+      "Bash(ls c:/Proyectos/Codexia/app/robots*)",
+      "WebFetch(domain:support.google.com)"
     ]
   }
 }

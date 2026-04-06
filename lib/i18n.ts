@@ -223,6 +223,8 @@ export const translations = {
         { label: 'Portafolio', href: '/portfolio' },
         { label: 'FAQ', href: '/faq' },
         { label: 'Contacto', href: '/contact' },
+        { label: 'COD Planilla', href: '/planilla' },
+        { label: 'COD Cobros', href: '/cobros' },
       ],
     },
     theme: {
@@ -500,6 +502,8 @@ export const translations = {
         { label: 'Portfolio', href: '/portfolio' },
         { label: 'FAQ', href: '/faq' },
         { label: 'Contact', href: '/contact' },
+        { label: 'COD Payroll', href: '/planilla' },
+        { label: 'COD Cobros', href: '/cobros' },
       ],
     },
     theme: {
