@@ -148,6 +148,28 @@ html.dark[data-theme="cobros"] {
   --color-ring: oklch(0.58 0.24 142);
 }
 
+/* ─── NEXUS orange theme ─── */
+html[data-theme="nexus"] {
+  --primary: oklch(0.52 0.20 38);
+  --primary-foreground: oklch(1 0 0);
+  --accent: oklch(0.58 0.18 45);
+  --accent-foreground: oklch(1 0 0);
+  --ring: oklch(0.52 0.20 38);
+  --color-primary: oklch(0.52 0.20 38);
+  --color-primary-foreground: oklch(1 0 0);
+  --color-accent: oklch(0.58 0.18 45);
+  --color-accent-foreground: oklch(1 0 0);
+  --color-ring: oklch(0.52 0.20 38);
+}
+
+html.dark[data-theme="nexus"] {
+  --primary: oklch(0.63 0.20 38);
+  --accent: oklch(0.67 0.18 45);
+  --color-primary: oklch(0.63 0.20 38);
+  --color-accent: oklch(0.67 0.18 45);
+  --color-ring: oklch(0.63 0.20 38);
+}
+
 /* Animaciones personalizadas */
 @keyframes fade-in {
   from {

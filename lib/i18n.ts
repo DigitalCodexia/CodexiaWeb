@@ -225,6 +225,7 @@ export const translations = {
         { label: 'Contacto', href: '/contact' },
         { label: 'COD Planilla', href: '/planilla' },
         { label: 'COD Cobros', href: '/cobros' },
+        { label: 'NEXUS POS', href: '/nexus' },
       ],
     },
     theme: {
@@ -504,6 +505,7 @@ export const translations = {
         { label: 'Contact', href: '/contact' },
         { label: 'COD Payroll', href: '/planilla' },
         { label: 'COD Cobros', href: '/cobros' },
+        { label: 'NEXUS POS', href: '/nexus' },
       ],
     },
     theme: {

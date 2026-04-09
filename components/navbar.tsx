@@ -61,6 +61,12 @@ export function Navbar() {
             >
               {t.nav.cobranza}
             </Link>
+            <Link
+              href="/nexus"
+              className="text-sm font-semibold text-primary border border-primary/40 rounded-full px-4 py-1.5 hover:bg-primary/10 transition-colors"
+            >
+              NEXUS POS
+            </Link>
             {/* Language Toggle */}
             <Button
               variant="ghost"
@@ -142,6 +148,13 @@ export function Navbar() {
                 onClick={() => setMobileOpen(false)}
               >
                 {t.nav.cobranza}
+              </Link>
+              <Link
+                href="/nexus"
+                className="block w-full text-center rounded-lg border border-primary/40 py-2 text-sm font-semibold text-primary hover:bg-primary/10 transition-colors mb-2"
+                onClick={() => setMobileOpen(false)}
+              >
+                NEXUS POS
               </Link>
             </div>
             <div className="mt-1">
