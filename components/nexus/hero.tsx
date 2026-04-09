@@ -4,8 +4,12 @@ import { useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Play } from "lucide-react"
 import { gsap } from "gsap"
+import { useLanguage } from "@/context/language-context"
 
 export function NexusHero() {
+  const { t } = useLanguage()
+  const p = t.nexusPage
+
   const badgeRef = useRef<HTMLDivElement>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const subRef = useRef<HTMLParagraphElement>(null)
@@ -28,53 +32,47 @@ export function NexusHero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background */}
       <div className="absolute inset-0 bg-background">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/8 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/8 rounded-full blur-3xl" />
       </div>
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
 
       <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <div ref={badgeRef} className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2" style={{ opacity: 0 }}>
             <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-sm text-muted-foreground">Sistema POS de Nueva Generación</span>
+            <span className="text-sm text-muted-foreground">{p.badge}</span>
           </div>
 
           <h1 ref={headingRef} className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl text-balance" style={{ opacity: 0 }}>
-            El punto de venta que tu negocio
+            {p.heading}
             <span className="block bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent mt-2">
-              merece
+              {p.headingHighlight}
             </span>
           </h1>
 
           <p ref={subRef} className="mt-8 text-lg leading-relaxed text-muted-foreground max-w-2xl mx-auto text-pretty" style={{ opacity: 0 }}>
-            NEXUS es el sistema de punto de venta más completo para restaurantes y comercios.
-            Panel de administración, inventario, contabilidad básica y facturación electrónica en una sola plataforma.
+            {p.subheading}
           </p>
 
           <div ref={ctaRef} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" style={{ opacity: 0 }}>
             <Button size="lg" className="px-8 h-14 text-base shadow-lg shadow-primary/25" asChild>
               <a href="https://wa.me/50763666033?text=Hola%20CODEXIA%2C%20quiero%20una%20demo%20de%20NEXUS%20POS." target="_blank" rel="noopener noreferrer">
-                Comenzar Ahora
+                {p.ctaPrimary}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </a>
             </Button>
             <Button size="lg" variant="outline" className="px-8 h-14 text-base" asChild>
               <a href="https://wa.me/50763666033?text=Hola%20CODEXIA%2C%20quiero%20ver%20una%20demo%20de%20NEXUS%20POS." target="_blank" rel="noopener noreferrer">
                 <Play className="mr-2 h-5 w-5" />
-                Ver Demo
+                {p.ctaDemo}
               </a>
             </Button>
           </div>
 
           <div ref={statsRef} className="mt-16 grid grid-cols-3 gap-8 border-t border-border pt-10" style={{ opacity: 0 }}>
-            {[
-              { value: "500+", label: "Negocios activos" },
-              { value: "99.9%", label: "Uptime garantizado" },
-              { value: "24/7", label: "Soporte técnico" },
-            ].map((stat) => (
+            {p.stats.map((stat) => (
               <div key={stat.label}>
                 <div className="text-3xl font-bold text-primary">{stat.value}</div>
                 <div className="mt-1 text-sm text-muted-foreground">{stat.label}</div>
@@ -83,7 +81,6 @@ export function NexusHero() {
           </div>
         </div>
 
-        {/* Dashboard preview */}
         <div ref={dashboardRef} className="mt-20 relative" style={{ opacity: 0 }}>
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10 pointer-events-none" />
           <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 rounded-3xl blur-2xl opacity-50" />
@@ -99,7 +96,7 @@ export function NexusHero() {
           </div>
           <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-20 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 shadow-lg">
             <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-sm text-muted-foreground">Panel de administración en tiempo real</span>
+            <span className="text-sm text-muted-foreground">{p.dashboardLabel}</span>
           </div>
         </div>
       </div>

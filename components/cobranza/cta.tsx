@@ -1,7 +1,13 @@
+"use client"
+
 import { ArrowRight, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useLanguage } from "@/context/language-context"
 
 export function CTA() {
+  const { t } = useLanguage()
+  const p = t.cobrosPage
+
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background to-card" />
@@ -16,22 +22,22 @@ export function CTA() {
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:3rem_3rem]" />
           <div className="relative px-8 py-20 sm:px-16 sm:py-28 text-center">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-primary-foreground text-balance">
-              Simplifica tu gestion de cobranza hoy
+              {p.ctaHeading}
             </h2>
             <p className="mt-6 text-lg text-primary-foreground/80 max-w-2xl mx-auto">
-              Solicita una demostracion personalizada y descubre como COD Cobros puede transformar tu proceso de cobranza
+              {p.ctaSubheading}
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" variant="secondary" className="text-base px-8 h-14 rounded-xl shadow-lg text-primary bg-white hover:bg-white/90" asChild>
+              <Button size="lg" className="text-base px-8 h-14 rounded-xl shadow-lg text-primary bg-white hover:bg-white/90" asChild>
                 <a href="https://wa.me/50763666033?text=Hola%20CODEXIA%2C%20quiero%20una%20demo%20de%20COD%20Cobros." target="_blank" rel="noopener noreferrer">
-                  Solicitar Demo
+                  {p.ctaPrimary}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </a>
               </Button>
               <Button size="lg" variant="outline" className="text-base px-8 h-14 rounded-xl border-2 border-white/30 text-primary-foreground bg-transparent hover:bg-white/10" asChild>
                 <a href="/contact">
                   <Phone className="mr-2 h-5 w-5" />
-                  Contactar Ventas
+                  {p.ctaSecondary}
                 </a>
               </Button>
             </div>
