@@ -77,10 +77,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: siteConfig.url,
-    languages: {
-      'es-PA': siteConfig.url,
-      'en': `${siteConfig.url}/en`,
-    },
   },
   category: 'technology',
 }
