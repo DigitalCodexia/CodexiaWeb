@@ -7,7 +7,7 @@ const footerLinks = {
     { name: "Actualizaciones", href: "#" },
   ],
   empresa: [
-    { name: "Sobre Nosotros", href: "https://www.digitalcodexia.com" },
+    { name: "Sobre Nosotros", href: "https://digitalcodexia.com" },
     { name: "Blog", href: "#" },
     { name: "Contacto", href: "#" },
   ],
@@ -39,7 +39,7 @@ export function Footer() {
             </p>
             <p className="mt-4 text-sm text-primary-foreground/70">
               Un producto de{" "}
-              <Link href="https://www.digitalcodexia.com" target="_blank" className="underline hover:text-primary-foreground">
+              <Link href="https://digitalcodexia.com" target="_blank" className="underline hover:text-primary-foreground">
                 Digital Codexia
               </Link>
             </p>

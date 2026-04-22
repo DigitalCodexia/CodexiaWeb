@@ -28,7 +28,7 @@ export function Header() {
           <Link href="#como-funciona" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Como Funciona
           </Link>
-          <Link href="https://www.digitalcodexia.com" target="_blank" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <Link href="https://digitalcodexia.com" target="_blank" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Digital Codexia
           </Link>
         </div>
@@ -60,7 +60,7 @@ export function Header() {
             <Link href="#como-funciona" className="block text-sm font-medium text-muted-foreground hover:text-foreground py-2">
               Como Funciona
             </Link>
-            <Link href="https://www.digitalcodexia.com" target="_blank" className="block text-sm font-medium text-muted-foreground hover:text-foreground py-2">
+            <Link href="https://digitalcodexia.com" target="_blank" className="block text-sm font-medium text-muted-foreground hover:text-foreground py-2">
               Digital Codexia
             </Link>
             <div className="flex flex-col gap-3 pt-4 border-t border-border">

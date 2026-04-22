@@ -28,7 +28,7 @@ function checkRateLimit(ip: string): boolean {
  * Confirmation email sent to the user (professional, minimal design)
  */
 function getConfirmationEmail(nombre: string, email: string, servicio: string): string {
-  const logoUrl = "https://www.digitalcodexia.com/logo.png"
+  const logoUrl = "https://digitalcodexia.com/logo.png"
   return `
     <!DOCTYPE html>
     <html lang="es">
@@ -170,10 +170,10 @@ function getConfirmationEmail(nombre: string, email: string, servicio: string): 
           </div>
           <div class="footer">
             <p>&copy; 2024 Digital Codexia. Todos los derechos reservados.</p>
-            <p style="margin: 8px 0 0;"><a href="https://www.digitalcodexia.com">www.digitalcodexia.com</a></p>
+            <p style="margin: 8px 0 0;"><a href="https://digitalcodexia.com">www.digitalcodexia.com</a></p>
             <p class="footer-links">
-              <a href="https://www.digitalcodexia.com/preferencias?email=${email}">Modificar preferencias</a> • 
-              <a href="https://www.digitalcodexia.com/unsubscribe?email=${email}">Dejar de recibir</a>
+              <a href="https://digitalcodexia.com/preferencias?email=${email}">Modificar preferencias</a> • 
+              <a href="https://digitalcodexia.com/unsubscribe?email=${email}">Dejar de recibir</a>
             </p>
           </div>
         </div>
@@ -186,7 +186,7 @@ function getConfirmationEmail(nombre: string, email: string, servicio: string): 
  * Admin notification email (professional, minimal design)
  */
 function getAdminEmail(nombre: string, negocio: string, email: string, whatsapp: string, servicio: string, mensaje: string | undefined): string {
-  const logoUrl = "https://www.digitalcodexia.com/logo.png"
+  const logoUrl = "https://digitalcodexia.com/logo.png"
   return `
     <!DOCTYPE html>
     <html lang="es">
@@ -396,7 +396,7 @@ function getAdminEmail(nombre: string, negocio: string, email: string, whatsapp:
             <p>Solicitud recibida desde el formulario de contacto de Digital Codexia</p>
             <p class="timestamp">${new Date().toLocaleString("es-ES")}</p>
             <p class="footer-links">
-              <a href="https://www.digitalcodexia.com/preferencias?email=${process.env.CONTACT_RECIPIENT_EMAIL}">Modificar preferencias de notificaciones</a>
+              <a href="https://digitalcodexia.com/preferencias?email=${process.env.CONTACT_RECIPIENT_EMAIL}">Modificar preferencias de notificaciones</a>
             </p>
           </div>
         </div>

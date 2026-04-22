@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   description: "Desarrollamos tiendas online, páginas web corporativas, landing pages y aplicaciones web a medida. Soluciones digitales profesionales para impulsar tu negocio en Panamá.",
   keywords: ["desarrollo web panama", "tiendas online", "e-commerce", "aplicaciones web", "landing pages", "diseño web profesional"],
   alternates: {
-    canonical: "https://www.digitalcodexia.com/services",
+    canonical: "https://digitalcodexia.com/services",
   },
   openGraph: {
     title: "Servicios Digitales | CODEXIA PANAMA",
     description: "Desarrollamos tiendas online, páginas web corporativas, landing pages y aplicaciones web a medida.",
-    url: "https://www.digitalcodexia.com/services",
+    url: "https://digitalcodexia.com/services",
     type: "website",
   },
 }

@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   description: "Sistema POS completo para restaurantes y comercios en Panamá. Panel de administración, inventario, contabilidad básica y facturación electrónica en una sola plataforma.",
   keywords: ["sistema pos panama", "punto de venta panama", "software restaurante panama", "sistema comercio panama", "facturacion electronica panama"],
   alternates: {
-    canonical: "https://www.digitalcodexia.com/nexus",
+    canonical: "https://digitalcodexia.com/nexus",
   },
   openGraph: {
     title: "NEXUS POS — Sistema de Punto de Venta para tu Negocio",
     description: "Panel de administración, inventario, contabilidad y facturación electrónica en una sola plataforma. Prueba gratis 14 días.",
-    url: "https://www.digitalcodexia.com/nexus",
+    url: "https://digitalcodexia.com/nexus",
     type: "website",
   },
 }
@@ -47,7 +47,7 @@ const nexusSchema = {
   "provider": {
     "@type": "Organization",
     "name": "CODEXIA PANAMA",
-    "url": "https://www.digitalcodexia.com",
+    "url": "https://digitalcodexia.com",
   },
   "areaServed": {
     "@type": "Country",

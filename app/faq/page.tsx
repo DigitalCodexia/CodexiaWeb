@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   description: "Resolvemos tus dudas sobre desarrollo web, tiendas online, costos, plazos y soporte. Todo lo que necesitas saber sobre nuestros servicios digitales en Panamá.",
   keywords: ["preguntas frecuentes", "faq desarrollo web", "cuanto cuesta una pagina web", "soporte web"],
   alternates: {
-    canonical: "https://www.digitalcodexia.com/faq",
+    canonical: "https://digitalcodexia.com/faq",
   },
   openGraph: {
     title: "Preguntas Frecuentes | CODEXIA PANAMA",
     description: "Resolvemos tus dudas sobre costos, plazos y soporte de desarrollo web.",
-    url: "https://www.digitalcodexia.com/faq",
+    url: "https://digitalcodexia.com/faq",
     type: "website",
   },
 }

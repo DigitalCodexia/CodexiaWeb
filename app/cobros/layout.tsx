@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   description: "Automatiza tus cobros con recordatorios programados, reportes detallados y seguimiento de cuentas por cobrar. Mejora tu flujo de efectivo desde Panamá.",
   keywords: ["sistema de cobros panama", "gestion de cobranza", "cuentas por cobrar", "software cobros panama", "recordatorios de pago"],
   alternates: {
-    canonical: "https://www.digitalcodexia.com/cobros",
+    canonical: "https://digitalcodexia.com/cobros",
   },
   openGraph: {
     title: "COD Cobros — Gestión Profesional de Cobranza",
     description: "Automatiza tus cobros con recordatorios, reportes y seguimiento completo. Mejora tu flujo de efectivo.",
-    url: "https://www.digitalcodexia.com/cobros",
+    url: "https://digitalcodexia.com/cobros",
     type: "website",
   },
 }
@@ -38,7 +38,7 @@ const cobrosSchema = {
   "provider": {
     "@type": "Organization",
     "name": "CODEXIA PANAMA",
-    "url": "https://www.digitalcodexia.com",
+    "url": "https://digitalcodexia.com",
   },
   "areaServed": {
     "@type": "Country",

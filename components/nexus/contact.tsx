@@ -51,7 +51,7 @@ export function NexusContact() {
               {[
                 { icon: Mail, label: "Email", value: "info@digitalcodexia.com", href: "mailto:info@digitalcodexia.com" },
                 { icon: Phone, label: "WhatsApp", value: "+507 6366-6033", href: "https://wa.me/50763666033" },
-                { icon: MapPin, label: "Web", value: "www.digitalcodexia.com", href: "https://www.digitalcodexia.com" },
+                { icon: MapPin, label: "Web", value: "www.digitalcodexia.com", href: "https://digitalcodexia.com" },
               ].map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-center gap-4">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
