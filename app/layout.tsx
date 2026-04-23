@@ -14,10 +14,10 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 const siteConfig = {
   name: 'CODEXIA PANAMA',
-  url: 'https://digitalcodexia.com',
+  url: 'https://www.digitalcodexia.com',
   description: 'Creamos tiendas online, páginas web, landing pages y aplicaciones web a medida para que tu negocio venda 24/7.',
-  logo: 'https://digitalcodexia.com/logo.png',
-  ogImage: 'https://digitalcodexia.com/og-image.png',
+  logo: 'https://www.digitalcodexia.com/logo.png',
+  ogImage: 'https://www.digitalcodexia.com/og-image.png',
 }
 
 export const metadata: Metadata = {
