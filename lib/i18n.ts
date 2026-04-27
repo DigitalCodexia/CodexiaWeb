@@ -16,7 +16,7 @@ export const translations = {
     hero: {
       heading: 'Tu Negocio, Digital y Rentable.',
       subheading: 'Webs, tiendas online y apps a medida. Diseño moderno, velocidad y resultados reales.',
-      socialProof: 'Más de 50 negocios ya crecen con nosotros',
+      socialProof: '',
       ctaPrimary: 'Agenda tu asesoría gratis',
       ctaSecondary: 'Ver servicios',
       bullet1: 'Entrega rápida',
@@ -350,7 +350,7 @@ export const translations = {
       ctaDemo: 'Ver Demo',
       dashboardLabel: 'Panel de administración en tiempo real',
       stats: [
-        { value: '500+', label: 'Negocios activos' },
+        { value: '24/7', label: 'Disponibilidad' },
         { value: '99.9%', label: 'Uptime garantizado' },
         { value: '24/7', label: 'Soporte técnico' },
       ],
@@ -393,7 +393,7 @@ export const translations = {
       pricingCta: 'Comenzar Prueba Gratuita',
       pricingNote: '14 días de prueba gratis · Sin tarjeta de crédito',
       pricingBilled: 'Facturado mensualmente · Cancela cuando quieras',
-      pricingTrust: 'Más de <strong>500 negocios</strong> ya confían en NEXUS',
+      pricingTrust: 'Prueba gratuita de 14 días · Sin tarjeta de crédito',
       includedTitle: 'Todo incluido:',
       included: [
         'Panel de administración completo',
@@ -408,7 +408,7 @@ export const translations = {
         'Capacitación inicial incluida',
       ],
       ctaHeading: 'Lleva tu negocio al siguiente nivel',
-      ctaSubheading: 'Únete a más de 500 negocios que ya están optimizando sus operaciones con NEXUS. Comienza tu prueba gratuita hoy.',
+      ctaSubheading: 'Optimiza tus operaciones con NEXUS. Comienza tu prueba gratuita hoy sin compromiso.',
       ctaPrimaryBtn: 'Comenzar Prueba Gratuita',
       ctaSecondaryBtn: 'Contactar Ventas',
       ctaDisclaimer: '14 días gratis · Sin tarjeta de crédito · Cancela cuando quieras',
@@ -447,7 +447,7 @@ export const translations = {
     hero: {
       heading: 'Your Business, Digital and Profitable.',
       subheading: 'Websites, online stores and custom apps. Modern design, speed and real results.',
-      socialProof: 'Over 50 businesses already growing with us',
+      socialProof: '',
       ctaPrimary: 'Book your free consultation',
       ctaSecondary: 'View services',
       bullet1: 'Fast delivery',
@@ -812,7 +812,7 @@ export const translations = {
       pricingCta: 'Start Free Trial',
       pricingNote: '14-day free trial · No credit card required',
       pricingBilled: 'Billed monthly · Cancel anytime',
-      pricingTrust: 'Over <strong>500 businesses</strong> already trust NEXUS',
+      pricingTrust: '14-day free trial · No credit card required',
       includedTitle: 'Everything included:',
       included: [
         'Complete admin panel',
@@ -827,7 +827,7 @@ export const translations = {
         'Initial training included',
       ],
       ctaHeading: 'Take your business to the next level',
-      ctaSubheading: 'Join 500+ businesses already optimizing their operations with NEXUS. Start your free trial today.',
+      ctaSubheading: 'Optimize your operations with NEXUS. Start your free trial today with no commitment.',
       ctaPrimaryBtn: 'Start Free Trial',
       ctaSecondaryBtn: 'Contact Sales',
       ctaDisclaimer: '14 days free · No credit card · Cancel anytime',

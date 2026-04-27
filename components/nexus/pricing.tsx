@@ -63,9 +63,6 @@ export function NexusPricing() {
           </div>
         </div>
 
-        <div className="mt-16 text-center text-muted-foreground">
-          Más de <span className="text-foreground font-semibold">500 negocios</span> ya confían en NEXUS
-        </div>
       </div>
     </section>
   )
