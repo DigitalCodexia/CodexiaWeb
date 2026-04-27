@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/context/language-context"
+import { PageTransition } from "@/components/page-transition"
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -193,7 +194,7 @@ export default function RootLayout({
         >
           <LanguageProvider>
             <Navbar />
-            {children}
+            <PageTransition>{children}</PageTransition>
             <Footer />
             <WhatsAppFloat />
             <Analytics />

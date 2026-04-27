@@ -9,7 +9,14 @@ export function Footer() {
   const { t } = useLanguage()
 
   return (
-    <footer className="border-t border-border bg-background py-12">
+    <footer className="relative border-t border-border bg-background py-12 overflow-hidden">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/codexia_icono_blanco.png"
+        alt=""
+        aria-hidden="true"
+        className="absolute -bottom-10 -right-10 w-64 object-contain opacity-[0.04] dark:opacity-[0.06] pointer-events-none select-none rotate-20"
+      />
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <div className="grid gap-8 md:grid-cols-3">
           {/* Brand */}

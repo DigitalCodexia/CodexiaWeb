@@ -18,6 +18,14 @@ export function Hero() {
 
       {/* ── Left content ── */}
       <div className="relative z-10 flex flex-col justify-center px-4 py-20 sm:px-6 lg:px-8 lg:py-0 w-full lg:w-1/2">
+        {/* Watermark */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/codexia_icono_blanco.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute bottom-0 right-0 w-64 object-contain opacity-[0.04] dark:opacity-[0.05] pointer-events-none select-none rotate-[-15deg] translate-x-8 translate-y-8"
+        />
         <div className="w-full max-w-xl ml-auto lg:pr-12">
 
           <motion.h1
@@ -74,6 +82,15 @@ export function Hero() {
 
         {/* Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-violet-500/20 dark:bg-violet-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        {/* Watermark logo */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/codexia_icono_blanco.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 m-auto w-[70%] max-w-sm object-contain opacity-[0.04] dark:opacity-[0.06] pointer-events-none select-none"
+        />
 
         {/* Browser mockup */}
         <motion.div

@@ -11,7 +11,14 @@ export function Services() {
   const { t } = useLanguage()
 
   return (
-    <section id="servicios" className="py-20 lg:py-28">
+    <section id="servicios" className="relative py-20 lg:py-28 overflow-hidden">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/codexia_icono_blanco.png"
+        alt=""
+        aria-hidden="true"
+        className="absolute -top-10 -left-10 w-72 object-contain opacity-[0.04] dark:opacity-[0.05] pointer-events-none select-none -rotate-12"
+      />
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">{t.services.eyebrow}</p>
