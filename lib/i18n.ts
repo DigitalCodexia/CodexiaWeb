@@ -14,8 +14,9 @@ export const translations = {
       promoBanner: 'Asesoría gratis esta semana',
     },
     hero: {
-      heading: 'Soluciones Digitales que Hacen Crecer tu Negocio en Panamá',
-      subheading: 'Tiendas online, páginas web, landing pages y aplicaciones web. Diseño moderno + velocidad + conversión.',
+      heading: 'Tu Negocio, Digital y Rentable.',
+      subheading: 'Webs, tiendas online y apps a medida. Diseño moderno, velocidad y resultados reales.',
+      socialProof: 'Más de 50 negocios ya crecen con nosotros',
       ctaPrimary: 'Agenda tu asesoría gratis',
       ctaSecondary: 'Ver servicios',
       bullet1: 'Entrega rápida',
@@ -444,8 +445,9 @@ export const translations = {
       promoBanner: 'Free consultation this week',
     },
     hero: {
-      heading: 'Digital Solutions That Grow Your Business in Panama',
-      subheading: 'Online stores, websites, landing pages and web applications. Modern design + speed + conversion.',
+      heading: 'Your Business, Digital and Profitable.',
+      subheading: 'Websites, online stores and custom apps. Modern design, speed and real results.',
+      socialProof: 'Over 50 businesses already growing with us',
       ctaPrimary: 'Book your free consultation',
       ctaSecondary: 'View services',
       bullet1: 'Fast delivery',
